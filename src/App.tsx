@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import InitialInfo from './Pages/InitialInfoPage';import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PasswordScreen from './Pages/PasswordScreen';
+import ReviewScreen from './Pages/ReviewScreen';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+       <Router>
+        <>
+          <Routes>
+            <Route path="*" element={<InitialInfo/>} />
+            <Route path="StepOne" element={<InitialInfo />} />
+            <Route path="StepTwo" element={<PasswordScreen />} />
+            <Route path="StepThree" element={<ReviewScreen />} />
+          </Routes>
+        </>
+      </Router>
+    </>
   );
 }
 

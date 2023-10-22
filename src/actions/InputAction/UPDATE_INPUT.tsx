@@ -1,0 +1,1 @@
+export const UPDATE_INPUT: string = 'UPDATE_INPUT';
