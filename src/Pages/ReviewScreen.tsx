@@ -30,15 +30,15 @@ const ReviewScreen: React.FC = () => {
               <div className={`form-group`}>
                 <div className="d-flex justify-content-center flex-column">
                   
-                    <div className='PasswordHolder p-3'>
-                    <span className='text-white'>UserName</span>
+                    <div className='PasswordHolder p-3 d-flex justify-content-between' >
+                    <span className='text-white '>UserName</span>
                       <span className='text-white'>{UserNAme}</span>
                     </div>
-                    <div className='EmailHolder p-3'>
+                    <div className='EmailHolder p-3  d-flex justify-content-between'>
                       <span className='text-white'>Email</span>
                       <span className='text-white'>{Email}</span>
                     </div>
-                    <div className='CountryHolder p-3'>
+                    <div className='CountryHolder p-3  d-flex justify-content-between'>
                       <span className='text-white'>Coutnry</span>
                       <span className='text-white'>{Coutnry.value}</span>
                     </div>
