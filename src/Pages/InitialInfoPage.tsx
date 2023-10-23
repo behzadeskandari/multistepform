@@ -1,4 +1,5 @@
-import React, { useState,ChangeEvent,useEffect, useReducer } from 'react';
+import React, { useState, ChangeEvent, useEffect, useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import { v4 as uuidv4 } from 'uuid';
 import Select from '../components/Select';
@@ -10,9 +11,7 @@ import {  Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 import InputReducer, { InputState } from '../state/reducers/InputReducer';
-import { UPDATE_INPUT } from '../actions/InputAction/UPDATE_INPUT';
-import UpdateInputReducer from '../state/actions/InputAction/UpdateInputAction';
-
+import UpdateInput,{UpdateInputEmail,UpdateInputCountry} from '../state/actions/InputAction/UpdateInputAction';
 
 
 const InputOneArrayOptions = { ErrorMessage: "", Id: "UserNameInput", Label: "Username",Name : "UserName" ,type:"text",PlaceHolder:"Input UserName",Value: "",Icon :  <i className="icon">!</i>,};
@@ -22,18 +21,17 @@ const InputTwoObjectOptions = {ErrorMessage:"test", Id:'EmailInput', Label:'Emai
 const buttonOptions = {BGColor:'#A39FC1', ButtonType:"button",  Title:'Continue', poinerEvent:true , FontColor:'#8B85B1'}
 
 const InitialInfo: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
   const [poinerEvent, setPoinerEvent] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const inititalState: InputState = {
-    inputValue: '',
-    // other initial state properties
-  };
-  const [state, dispatch] = useReducer(InputReducer, inititalState);
+  // const [state, dispatch] = useReducer(InputReducer, inititalState);
   const navigate = useNavigate();
+
   const handleInputChangeUserName = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
@@ -45,7 +43,8 @@ const InitialInfo: React.FC = () => {
       setError('');
     }
     setUserName(newValue);
-    dispatch(UpdateInputReducer(newValue))
+    
+    dispatch(UpdateInput(newValue))
     updatePointerEvent(newValue, email);
   };
 
@@ -53,7 +52,7 @@ const InitialInfo: React.FC = () => {
     const newValue = event.target.value;
     
     setEmail(newValue);
-    dispatch(UpdateInputReducer(newValue))
+    dispatch(UpdateInputEmail(newValue))
     updatePointerEvent(userName, newValue);
   };
 
@@ -71,8 +70,11 @@ const InitialInfo: React.FC = () => {
       setPoinerEvent(false);
     }
   };
+
+
   useEffect(() => {
     console.log(selectedOption,'selectedOption')
+    dispatch(UpdateInputCountry(selectedOption))
   },[selectedOption])
 
   const HandleClick = (event:  any) => {

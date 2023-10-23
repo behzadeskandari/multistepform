@@ -34,7 +34,7 @@ const Button: React.FC<{options:MyComponentProps,height:string,type:string,poine
 
   return (
     // padding: '10px 15px 10px 15px',  margin :'9px'
-    <button onClick={HandleClick} type={"button"} style={{ backgroundColor:options.BGColor, color: options.FontColor , fontSize: '15px',width: '100%',borderRadius:'3px',pointerEvents : options.poinerEvent === poinerEvent ? "auto" : "none" }}>
+    <button onClick={HandleClick} type={"button"} style={{ backgroundColor:options.BGColor, color: options.FontColor , fontSize: '15px', padding: '10px',width: '100%',borderRadius:'3px',pointerEvents : options.poinerEvent === poinerEvent ? "auto" : "none" }}>
       {options.Title}
     </button>
   )

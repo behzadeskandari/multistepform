@@ -1,5 +1,6 @@
 import React, { useState,ChangeEvent,useEffect } from 'react';
 import Header from '../components/Header';
+import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -7,6 +8,8 @@ import Form from 'react-bootstrap/Form';
 import {  Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
+import InputReducer, { InputState } from '../state/reducers/InputReducer';
+import UpdateInput from '../state/actions/InputAction/UpdateInputAction';
 
 const InputOneArrayOptions = { ErrorMessage: "", Id: "PasswordInput", Label: "Password", Name: "Password", type: "password", PlaceHolder: "Input Password", Value: "", Icon: null, };
 
@@ -16,7 +19,7 @@ const InputTwoObjectOptions = { ErrorMessage: "test", Id: 'PasswordInputRepeat',
 
 
 const PasswordScreen: React.FC = () => {
-   
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [poinerEvent, setPoinerEvent] = useState(false);
@@ -29,6 +32,7 @@ const PasswordScreen: React.FC = () => {
 
     
     setPassword(newValue);
+     dispatch(UpdateInput(newValue))
     updatePointerEvent(newValue, passwordRepeat);
   };
 
@@ -46,7 +50,8 @@ const PasswordScreen: React.FC = () => {
 
    const handleInputRepeatPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setPasswordRepeat(newValue);
+     setPasswordRepeat(newValue);
+     dispatch(UpdateInput(newValue))
     updatePointerEvent(password, newValue);
   };
 
